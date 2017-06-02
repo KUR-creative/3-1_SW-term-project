@@ -114,6 +114,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        update_btn = (Button)findViewById(R.id.update_btn);
+        update_btn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                ContentValues new_values = new ContentValues();
+                new_values.put("address", "UPDATED DATA");
+                db.update("data", new_values, "name=?", new String[] {"지워"});
+            }
+        });
+
 
         ArrayList<Integer> list = new ArrayList<>();
         list.add(1);
