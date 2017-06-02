@@ -51,9 +51,15 @@ public class MainActivity extends AppCompatActivity {
     DBHelper helper;
     SQLiteDatabase db;
 
+    Button insert_btn;
+    Button select_btn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        insert_btn = (Button)findViewById(R.id.insert_btn);
+        select_btn = (Button)findViewById(R.id.select_btn);
 
         helper = new DBHelper(this, "person.cb", null, 1); // version은 내 맘대로 함.
         db = helper.getWritableDatabase();

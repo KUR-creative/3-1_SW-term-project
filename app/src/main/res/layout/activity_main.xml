@@ -47,6 +47,12 @@
             android:text="Route"
             android:id="@+id/btn_route" />
 
+        <Button
+            android:id="@+id/insert_btn"
+            android:layout_width="76dp"
+            android:layout_height="wrap_content"
+            android:text="INSERT" />
+
     </LinearLayout>
 
     <LinearLayout
@@ -66,6 +72,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Search" />
+
+        <Button
+            android:id="@+id/select_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SELECT" />
+
     </LinearLayout>
 
     <FrameLayout
@@ -82,5 +95,6 @@
             android:layout_width="100dp"
             android:layout_height="match_parent"
             android:layout_gravity="left|top" />
+
     </FrameLayout>
 </LinearLayout>
