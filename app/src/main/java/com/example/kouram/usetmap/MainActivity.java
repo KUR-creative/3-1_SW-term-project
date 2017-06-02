@@ -3,6 +3,7 @@ package com.example.kouram.usetmap;
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
@@ -46,17 +47,24 @@ public class MainActivity extends AppCompatActivity {
     TMapPoint start, end;
     RadioGroup typeView;
 
+    //mine
+    DBHelper helper;
+    SQLiteDatabase db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        helper = new DBHelper(this, "person.cb", null, 1); // version은 내 맘대로 함.
+        db = helper.getWritableDatabase();
+        helper.onCreate(db);
 
         ArrayList<Integer> list = new ArrayList<>();
         list.add(1);
         list.add(100);
         list.add(10000);
 
-        Saver saver = new Saver();
+        //Saver saver = new Saver();
         //saver.save(list);
 
         setContentView(R.layout.activity_main);
