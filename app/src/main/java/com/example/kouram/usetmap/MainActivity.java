@@ -1,6 +1,7 @@
 package com.example.kouram.usetmap;
 
 import android.Manifest;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.database.sqlite.SQLiteDatabase;
@@ -57,13 +58,27 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        insert_btn = (Button)findViewById(R.id.insert_btn);
-        select_btn = (Button)findViewById(R.id.select_btn);
+        setContentView(R.layout.activity_main);
 
         helper = new DBHelper(this, "person.cb", null, 1); // version은 내 맘대로 함.
         db = helper.getWritableDatabase();
         helper.onCreate(db);
+
+        insert_btn = (Button)findViewById(R.id.insert_btn);
+        insert_btn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                /*
+                ContentValues values = new ContentValues();
+                values.put("name", "asdf");
+                values.put("age", 26);
+                values.put("address", "ButSSan");
+                db.insert("data", null, values);*/
+                System.out.println("call insert click listener");
+            }
+        });
+
+        select_btn = (Button)findViewById(R.id.select_btn);
 
         ArrayList<Integer> list = new ArrayList<>();
         list.add(1);
@@ -73,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
         //Saver saver = new Saver();
         //saver.save(list);
 
-        setContentView(R.layout.activity_main);
+
         typeView = (RadioGroup)findViewById(R.id.group_type);
         keywordView = (EditText) findViewById(R.id.edit_keyword);
         listView = (ListView) findViewById(R.id.listView);
