@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -67,18 +68,33 @@ public class MainActivity extends AppCompatActivity {
         insert_btn = (Button)findViewById(R.id.insert_btn);
         insert_btn.setOnClickListener(new View.OnClickListener(){
             @Override
-            public void onClick(View v) {
-                /*
+            public void onClick(View v) {               System.out.println("call insert click listener");
                 ContentValues values = new ContentValues();
                 values.put("name", "asdf");
                 values.put("age", 26);
                 values.put("address", "ButSSan");
-                db.insert("data", null, values);*/
-                System.out.println("call insert click listener");
+                db.insert("data", null, values);
             }
         });
 
         select_btn = (Button)findViewById(R.id.select_btn);
+        select_btn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {               System.out.println("call select btn click listener");
+                Cursor c = db.query("data", null, null, null, null, null, null, null);
+                while(c.moveToNext()){
+                    int id = c.getInt(c.getColumnIndex("_id"));
+                    String name = c.getString(c.getColumnIndex("name"));
+                    int age = c.getInt(c.getColumnIndex("age"));
+                    String address = c.getString(c.getColumnIndex("address"));
+
+                    System.out.println("result: " + "_id = " + id
+                                                + ", name = " + name
+                                                + ", age = " + age
+                                                + ", address = " + address);
+                }
+            }
+        });
 
         ArrayList<Integer> list = new ArrayList<>();
         list.add(1);
