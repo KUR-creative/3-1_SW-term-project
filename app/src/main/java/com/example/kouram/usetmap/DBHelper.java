@@ -18,8 +18,9 @@ class DBHelper extends SQLiteOpenHelper {
      */
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String sql = "create table if not exist data( _id INTEGER primary key autoincremet, "
-                                                        + "nmae TEXT, age INTEGER, address TEXT)";
+        // sql의 syntax가 틀리면 앱이 죽어버린다.
+        String sql = "create table if not exists data( _id INTEGER primary key autoincrement, "
+                                                        + "name TEXT, age INTEGER, address TEXT)";
         db.execSQL(sql);
     }
 
