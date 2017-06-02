@@ -55,6 +55,8 @@ public class MainActivity extends AppCompatActivity {
 
     Button insert_btn;
     Button select_btn;
+    Button delete_btn;
+    Button update_btn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +76,12 @@ public class MainActivity extends AppCompatActivity {
                 values.put("age", 26);
                 values.put("address", "ButSSan");
                 db.insert("data", null, values);
+
+                ContentValues values2 = new ContentValues();
+                values2.put("name", "지워");
+                values2.put("age", 26);
+                values2.put("address", "스울");
+                db.insert("data", null, values2);
             }
         });
 
@@ -95,6 +103,17 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
+        delete_btn = (Button)findViewById(R.id.delete_btn);
+        delete_btn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                System.out.println("call delete click listener");
+                db.delete("data", "_id=?", new String[]{"1"}); // _id = 1 인 거 지워짐.
+                db.delete("data", "name=?", new String[]{"지워"}); // name = 지워 인 거 전부 지워짐.
+            }
+        });
+
 
         ArrayList<Integer> list = new ArrayList<>();
         list.add(1);

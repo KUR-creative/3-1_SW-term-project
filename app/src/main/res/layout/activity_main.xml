@@ -53,6 +53,13 @@
             android:layout_height="wrap_content"
             android:text="INSERT" />
 
+        <Button
+            android:id="@+id/delete_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="delete" />
+
     </LinearLayout>
 
     <LinearLayout
@@ -72,6 +79,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Search" />
+
+        <Button
+            android:id="@+id/update_btn"
+            android:layout_width="77dp"
+            android:layout_height="wrap_content"
+            android:text="update" />
 
         <Button
             android:id="@+id/select_btn"
