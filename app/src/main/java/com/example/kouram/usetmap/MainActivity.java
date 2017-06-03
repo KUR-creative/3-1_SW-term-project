@@ -57,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
     Button select_btn;
     Button delete_btn;
     Button update_btn;
+    Button delete_all_btn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -121,6 +122,15 @@ public class MainActivity extends AppCompatActivity {
                 ContentValues new_values = new ContentValues();
                 new_values.put("address", "UPDATED DATA");
                 db.update("data", new_values, "name=?", new String[] {"지워"});
+            }
+        });
+
+        delete_all_btn = (Button)findViewById(R.id.delete_all_btn);
+        delete_all_btn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                db.delete("data", "name=?", new String[]{"지워"}); // String[] 이거 문자열 하나만 가능
+                db.delete("data", "name=?", new String[]{"asdf"});
             }
         });
 
