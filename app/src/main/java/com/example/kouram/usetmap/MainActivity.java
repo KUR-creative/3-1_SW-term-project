@@ -12,6 +12,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.media.MediaPlayer;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -58,6 +59,10 @@ public class MainActivity extends AppCompatActivity {
     Button delete_btn;
     Button update_btn;
     Button delete_all_btn;
+
+    MediaPlayer mediaPlayer;
+    Button music_btn;
+    Button ticks_btn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -143,6 +148,36 @@ public class MainActivity extends AppCompatActivity {
         //Saver saver = new Saver();
         //saver.save(list);
 
+        final Context ctx = this;
+
+        mediaPlayer = MediaPlayer.create(this, R.raw.title);
+        music_btn = (Button)findViewById(R.id.music_btn);
+        music_btn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                if(isPlaying()) {
+                    mediaPlayer.stop();
+                    mediaPlayer.release();
+                    mediaPlayer = null; // garbage!
+                }else {
+                    mediaPlayer.start();
+                }
+            }
+
+            private boolean isPlaying(){
+                if(mediaPlayer == null){
+                    mediaPlayer = MediaPlayer.create(ctx, R.raw.title); //for replaying!
+                    return false;
+                }
+
+                if(mediaPlayer.isPlaying()){
+                    return true;
+                }else{
+                    return false;
+                }
+            }
+        });
+        ticks_btn = (Button)findViewById(R.id.ticks_btn);
 
         typeView = (RadioGroup)findViewById(R.id.group_type);
         keywordView = (EditText) findViewById(R.id.edit_keyword);
