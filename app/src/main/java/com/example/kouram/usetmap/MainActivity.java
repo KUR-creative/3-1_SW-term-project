@@ -34,8 +34,10 @@ import com.skp.Tmap.TMapPoint;
 import com.skp.Tmap.TMapPolyLine;
 import com.skp.Tmap.TMapView;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
@@ -134,6 +136,25 @@ public class MainActivity extends AppCompatActivity {
                                                 + ", name = " + name
                                                 + ", age = " + age
                                                 + ", address = " + address);
+                }
+
+                Cursor blobCursor = db.query("blobs", null, null, null, null, null, null, null);
+                while(blobCursor.moveToNext()){
+                    int id = blobCursor.getInt(blobCursor.getColumnIndex("_id"));
+                    byte[] data = blobCursor.getBlob(blobCursor.getColumnIndex("data"));
+
+                    try {
+                        ObjectInputStream ois = new ObjectInputStream(new ByteArrayInputStream(data));
+                        ArrayList<Integer> outList = (ArrayList<Integer>)ois.readObject();
+                        System.out.print("list values: ");
+                        for(int num : outList){
+                            System.out.println(num);
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } catch (ClassNotFoundException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         });
