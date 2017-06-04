@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        helper = new DBHelper(this, "person.cb", null, 1); // version은 내 맘대로 함.
+        helper = new DBHelper(this, "person.db", null, 1); // version은 내 맘대로 함.
         db = helper.getWritableDatabase();
         helper.onCreate(db);
 
