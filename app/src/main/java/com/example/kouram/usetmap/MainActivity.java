@@ -34,6 +34,9 @@ import com.skp.Tmap.TMapPoint;
 import com.skp.Tmap.TMapPolyLine;
 import com.skp.Tmap.TMapView;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -73,6 +76,27 @@ public class MainActivity extends AppCompatActivity {
         db = helper.getWritableDatabase();
         helper.onCreate(db);
 
+        //blob data
+        ArrayList<Integer> list = new ArrayList<>();
+        list.add(1);
+        list.add(100);
+        list.add(10000);
+        //serialize data (bos and oos do that jobs!)
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        ObjectOutputStream oos = null;
+        try {
+            oos = new ObjectOutputStream(bos);
+            oos.writeObject(list);
+            oos.flush();
+            oos.close();
+            bos.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        // get blob data
+        byte[] blobData = bos.toByteArray();
+
+        // DB buttons
         insert_btn = (Button)findViewById(R.id.insert_btn);
         insert_btn.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -140,13 +164,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        ArrayList<Integer> list = new ArrayList<>();
-        list.add(1);
-        list.add(100);
-        list.add(10000);
-
-        //Saver saver = new Saver();
-        //saver.save(list);
 
         final Context ctx = this;
 
