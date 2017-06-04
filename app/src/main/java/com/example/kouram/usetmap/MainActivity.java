@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         // get blob data
-        byte[] blobData = bos.toByteArray();
+        final byte[] blobData = bos.toByteArray();
 
         // DB buttons
         insert_btn = (Button)findViewById(R.id.insert_btn);
@@ -112,6 +112,10 @@ public class MainActivity extends AppCompatActivity {
                 values2.put("age", 26);
                 values2.put("address", "스울");
                 db.insert("data", null, values2);
+
+                ContentValues blobValue = new ContentValues();
+                blobValue.put("data", blobData);
+                db.insert("blobs", null, blobValue);
             }
         });
 
