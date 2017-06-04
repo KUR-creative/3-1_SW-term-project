@@ -32,6 +32,8 @@ class DBHelper extends SQLiteOpenHelper {
         String sql = "drop table if exists data";
         db.execSQL(sql);
 
+        String blobSql = "drop table if exists blobs";
+        db.execSQL(blobSql);
         onCreate(db);
     }
 }
